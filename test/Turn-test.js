@@ -48,4 +48,12 @@ describe('Turn', function() {
     
     expect(turn.evaluateGuess).to.be.a('function');
   });
+
+  it('should return a bool when the guess is evaluated correct or incorrect', function() {
+    const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const turn = new Turn('array', card);
+    const returnGuess = turn.evaluateGuess();
+    
+    expect(returnGuess).to.equal(false);
+  });
 });
