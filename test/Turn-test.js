@@ -51,10 +51,12 @@ describe('Turn', function() {
 
   it('should return a bool when the guess is evaluated correct or incorrect', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    const turn = new Turn('array', card);
-    const returnGuess = turn.evaluateGuess();
-    
+    let turn = new Turn('array', card);
+    let returnGuess = turn.evaluateGuess();
     expect(returnGuess).to.equal(false);
+    turn = new Turn('object', card);
+    returnGuess = turn.evaluateGuess();
+    expect(returnGuess).to.equal(true);
   });
 
   it('should have a function that returns if the answer is correct or incorrect', function() {
