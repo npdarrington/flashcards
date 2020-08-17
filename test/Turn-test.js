@@ -3,3 +3,10 @@ const expect = chai.expect;
 
 const Turn = require('../src/Turn');
 const Card = require('../src/Card');
+
+describe('Turn', function() {
+  it('should be a function', function() {
+    const turn = new Turn();
+    expect(Turn).to.be.a('function');
+  });
+});
