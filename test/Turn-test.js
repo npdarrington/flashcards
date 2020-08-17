@@ -18,7 +18,6 @@ describe('Turn', function() {
   it('should instantiate with two arguments, a string answer and card it\'s referenced to', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('function', card);
-
     expect(turn.attemptedAnswer).to.be.a('string');
     expect(turn.currentCard).to.be.an.instanceof(Card);
   });
@@ -27,7 +26,6 @@ describe('Turn', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('object', card);
     let returnValue = turn.returnGuess();
-    
     expect(turn.returnGuess).to.be.a('function');
     expect(returnValue).to.equal('object');
   });
@@ -36,7 +34,6 @@ describe('Turn', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('array', card);
     let returnCard = turn.returnCard();
-    
     expect(turn.returnCard).to.be.a('function');
     expect(returnCard).to.be.an.instanceof(Card);
     expect(returnCard).to.deep.equal(card);
@@ -45,7 +42,6 @@ describe('Turn', function() {
   it('should have a function that evalutes the guess', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('array', card);
-    
     expect(turn.evaluateGuess).to.be.a('function');
   });
 
