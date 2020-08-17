@@ -22,4 +22,13 @@ describe('Turn', function() {
     expect(turn.attemptedAnswer).to.be.a('string');
     expect(turn.currentCard).to.be.an.instanceof(Card);
   });
+
+  it('should have a function that returns the guess', function() {
+    const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const turn = new Turn('object', card);
+    let returnValue = turn.returnGuess();
+    
+    expect(turn.returnGuess).to.be.a('function');
+    expect(returnValue).to.equal('object');
+  });
 });
