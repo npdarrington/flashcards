@@ -34,11 +34,18 @@ describe('Turn', function() {
 
   it('should have a function that returns the card', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    const turn = new Turn('object', card);
+    const turn = new Turn('array', card);
     let returnCard = turn.returnCard();
     
     expect(turn.returnCard).to.be.a('function');
     expect(returnCard).to.be.an.instanceof(Card);
     expect(returnCard).to.deep.equal(card);
+  });
+
+  it('should have a function that evalutes the guess', function() {
+    const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const turn = new Turn('array', card);
+    
+    expect(turn.evaluateGuess).to.be.a('function');
   });
 });
