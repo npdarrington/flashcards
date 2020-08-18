@@ -7,6 +7,10 @@ class Turn {
   returnGuess() {
     return this.attemptedAnswer;
   }
+
+  returnCard() {
+    return this.currentCard;
+  }
 }
 
 module.exports = Turn;
