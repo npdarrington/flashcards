@@ -16,6 +16,11 @@ class Turn {
     return (this.attemptedAnswer === this.currentCard.correctAnswer ?
       true : false);
   }
+
+  giveFeedback() {
+    const checkEvaluatedGuess = this.evaluateGuess();
+    return (checkEvaluatedGuess ? `correct!` : `incorrect!`);
+  }
 }
 
 module.exports = Turn;
