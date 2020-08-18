@@ -3,6 +3,10 @@ class Turn {
     this.attemptedAnswer = attemptedAnswer;
     this.currentCard = currentCard;
   }
+
+  returnGuess() {
+    return this.attemptedAnswer;
+  }
 }
 
 module.exports = Turn;
