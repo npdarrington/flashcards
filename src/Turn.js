@@ -1,6 +1,7 @@
 class Turn {
-  constructor() {
-    
+  constructor(attemptedAnswer, currentCard) {
+    this.attemptedAnswer = attemptedAnswer;
+    this.currentCard = currentCard;
   }
 }
 
