@@ -25,4 +25,11 @@ describe('Round', () => {
     const round = new Round(deck);
     expect(round.deck).to.deep.equal(deck);
   });
+
+  it('should track the number of turns taken', () => {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const deck = new Deck([card1]);
+    const round = new Round(deck);
+    expect(round.turns).to.equal(0);
+  });
 });
