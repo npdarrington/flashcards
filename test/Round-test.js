@@ -33,10 +33,21 @@ describe('Round', () => {
     expect(round.turns).to.equal(0);
   });
 
-  it ('should track the id of guesses that were made incorrectly', () => {
+  it('should track the id of guesses that were made incorrectly', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const deck = new Deck([card1]);
     const round = new Round(deck);
     expect(round.incorrectGuesses).to.deep.equal([]);
   });
+
+  it('should have a function that returns the current card in play', () => {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+    const currentCard = round.returnCurrentCard();
+    expect(round.returnCurrentCard).to.be.a('function');
+    expect(currentCard).to.equal(card1);
+  })
 });
