@@ -11,4 +11,9 @@ describe('Round', () => {
     const round = new Round();
     expect(Round).to.be.a('function');
   });
+
+  it('should be an instance of Round', () => {
+    const round = new Round();
+    expect(round).to.be.an.instanceof(Round);
+  });
 });
