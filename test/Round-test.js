@@ -117,4 +117,13 @@ describe('Round', () => {
     expect(evaluateGuess).to.equal('incorrect!');
     expect(round.incorrectGuesses).to.deep.equal([2]);
   });
+
+  it('should have a function that returns the percentage of correct guesses', () => {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+    expect(round.calculatePercentCorrect).to.be.a('function');
+  });
 });
