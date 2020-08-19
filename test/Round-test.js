@@ -138,4 +138,17 @@ describe('Round', () => {
     returnPercent = round.takeTurn('gallbladder');
     expect(returnPercent).to.equal(50);
   });
+
+  it('should have a function that returns a correct or incorrect message', () => {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+    expect(round.giveFeedback).to.be.a('function');
+    let returnMessage = round.takeTurn('pug');
+    expect(returnMessage).to.equal('incorrect!');
+    returnMessage = round.takeTurn('gallbladder');
+    expect(returnMessage).to.equal('correct!');
+  });
 });
