@@ -94,29 +94,27 @@ describe('Round', () => {
     expect(currentCard).to.equal(card2);
   });
 
-  it.skip('should evaluate the guess when a turn is played', () => {
+  it('should evaluate the guess when a turn is played', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
     let evaluateGuess = round.takeTurn('sea otter');
-    expect(evaluateGuess).to.equal('correct!');
+    expect(evaluateGuess).to.equal(true);
     evaluateGuess = round.takeTurn('appendix');
-    expect(evaluateGuess).to.equal('incorrect!');
+    expect(evaluateGuess).to.equal(false);
   });
 
-  it.skip('should store the id of the cards on incorrect guesses', () => {
+  it('should store the id of the cards on incorrect guesses', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    let evaluateGuess = round.takeTurn('sea otter');
-    expect(evaluateGuess).to.equal('correct!');
+    round.takeTurn('sea otter');
     expect(round.incorrectGuesses).to.deep.equal([]);
-    evaluateGuess = round.takeTurn('appendix');
-    expect(evaluateGuess).to.equal('incorrect!');
+    round.takeTurn('appendix');
     expect(round.incorrectGuesses).to.deep.equal([2]);
   });
 
