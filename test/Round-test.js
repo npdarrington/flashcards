@@ -80,4 +80,15 @@ describe('Round', () => {
     round.takeTurn('capybara');
     expect(round.turns).to.equal(1);
   });
+
+  it('should update the current card to the next card after a turn is played', () => {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+    round.takeTurn('sea otter');
+    const currentCard = round.currentCard();
+    expect(currentCard).to.equal(card2);
+  });
 });
