@@ -1,3 +1,5 @@
+const Turn = require('./Turn');
+
 class Round {
   constructor(cards) {
     this.deck = cards;
@@ -8,6 +10,8 @@ class Round {
   returnCurrentCard() {
     return this.deck.cardSet[this.turns];
   }
+
+  
 }
 
 module.exports = Round;
