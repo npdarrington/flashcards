@@ -32,4 +32,11 @@ describe('Round', () => {
     const round = new Round(deck);
     expect(round.turns).to.equal(0);
   });
+
+  it ('should track the id of guesses that were made incorrectly', () => {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const deck = new Deck([card1]);
+    const round = new Round(deck);
+    expect(round.incorrectGuesses).to.deep.equal([]);
+  });
 });
