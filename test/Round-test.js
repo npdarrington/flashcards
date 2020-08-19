@@ -26,21 +26,21 @@ describe('Round', () => {
     expect(round.deck).to.deep.equal(deck);
   });
 
-  it.skip('should track the number of turns taken', () => {
+  it('should track the number of turns taken', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const deck = new Deck([card1]);
     const round = new Round(deck);
     expect(round.turns).to.equal(0);
   });
 
-  it.skip('should track the id of guesses that were made incorrectly', () => {
+  it('should track the id of guesses that were made incorrectly', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const deck = new Deck([card1]);
     const round = new Round(deck);
     expect(round.incorrectGuesses).to.deep.equal([]);
   });
 
-  it.skip('should have a function that returns the current card in play', () => {
+  it('should have a function that returns the current card in play', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
@@ -51,7 +51,7 @@ describe('Round', () => {
     expect(currentCard).to.equal(card1);
   });
 
-  it.skip('should have a function that controls the turn during a round of play', () => {
+  it('should have a function that controls the turn during a round of play', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
@@ -60,7 +60,7 @@ describe('Round', () => {
     expect(round.takeTurn).to.be.a('function');
   });
 
-  it.skip('should play a turn when a guess is made', () => {
+  it('should play a turn when a guess is made', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
@@ -68,7 +68,7 @@ describe('Round', () => {
     const round = new Round(deck);
     const playRound = round.takeTurn('pug');
     expect(playRound).to.be.an.instanceof(Turn);
-    expect(round.currentCard).to.equal(card1);
+    expect(round.returnCurrentCard()).to.equal(card1);
   });
 
   it.skip('should update the round each time a turn is played regardless of correct or incorrect answer', () => {
