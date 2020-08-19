@@ -23,7 +23,7 @@ describe('Round', () => {
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    expect(round.deck).to.deep.equal(deck);
+    expect(round.deck.cardSet).to.deep.equal(deck);
   });
 
   it('should track the number of turns taken', () => {
@@ -90,5 +90,17 @@ describe('Round', () => {
     round.takeTurn('sea otter');
     const currentCard = round.currentCard();
     expect(currentCard).to.equal(card2);
+  });
+
+  it('should evaluate the guess when a turn is played', () => {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+    let evaluateGuess = round.takeTurn('sea otter');
+    expect(evaluateGuess).to.equal('correct!');
+    evaluateGuess = round.takeTurn('appendix');
+    expect(evaluateGuess).to.equal('incorrect!');
   });
 });
