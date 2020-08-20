@@ -1,14 +1,12 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const Turn = require('../src/Turn');
 const Card = require('../src/Card');
 const Deck = require('../src/Deck');
 const Round = require('../src/Round.js');
 
 describe('Round', () => {
   it('should be a function', () => {
-    const round = new Round();
     expect(Round).to.be.a('function');
   });
 
@@ -130,13 +128,12 @@ describe('Round', () => {
     expect(round.calculatePercentCorrect()).to.equal(50);
   });
 
-  it.skip('should have a function that returns a correct or incorrect message', () => {
+  it('should have a function that returns a correct or incorrect message', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    expect(round.giveFeedback).to.be.a('function');
     let returnMessage = round.takeTurn('pug');
     expect(returnMessage).to.equal('incorrect!');
     returnMessage = round.takeTurn('gallbladder');
