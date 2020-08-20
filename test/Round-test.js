@@ -106,7 +106,7 @@ describe('Round', () => {
     expect(round.incorrectGuesses).to.deep.equal([2]);
   });
 
-  it.skip('should have a function that returns the percentage of correct guesses', () => {
+  it('should have a function that returns the percentage of correct guesses', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
@@ -115,16 +115,19 @@ describe('Round', () => {
     expect(round.calculatePercentCorrect).to.be.a('function');
   });
 
-  it.skip('should return the percentage as feedback for the user', () => {
+  it('should return the percentage as feedback for the user', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
-    const deck = new Deck([card1, card2, card3]);
+    const card4 = new Card(4, 'What is the captial of Colorado?', ['Grand Junction', 'Colorado Springs', 'Denver'], 'Denver');
+    const deck = new Deck([card1, card2, card3, card4]);
     const round = new Round(deck);
-    let returnPercent = round.takeTurn('pug');
+    round.takeTurn('pug');
     expect(round.incorrectGuesses).to.deep.equal([1]);
-    returnPercent = round.takeTurn('gallbladder');
-    expect(returnPercent).to.equal(50);
+    round.takeTurn('gallbladder');
+    round.takeTurn('gotham');
+    round.takeTurn('Denver');
+    expect(round.calculatePercentCorrect()).to.equal(50);
   });
 
   it.skip('should have a function that returns a correct or incorrect message', () => {
