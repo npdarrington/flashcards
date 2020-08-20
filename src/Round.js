@@ -22,17 +22,12 @@ class Round {
   }
 
   calculatePercentCorrect() {
-    let percent = 0;
-    if (this.incorrectGuesses.length === 0) {
-      percent = 100;
-    } else {
-      percent = (this.incorrectGuesses.length / this.deck.cardSet.length) * 100;
-    }
-    return percent;
+    const correctGuesses = (this.turns - this.incorrectGuesses.length);
+    return Math.floor((correctGuesses / this.turns) * 100);
   }
 
   endRound() {
-    return `** Round over!** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
+    console.log(`** Round over!** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`);
   }
 }
 
