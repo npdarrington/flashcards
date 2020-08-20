@@ -20,6 +20,16 @@ class Round {
     turn.currentCard = this.returnCurrentCard();
     return userFeedback;
   }
+
+  calculatePercentCorrect() {
+    let percent = 0;
+    if (this.incorrectGuesses.length === 0) {
+      percent = 100;
+    } else {
+      percent = (this.incorrectGuesses.length / this.deck.cardSet.length) * 100;
+    }
+    return percent;
+  }
 }
 
 module.exports = Round;
