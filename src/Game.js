@@ -11,7 +11,9 @@ class Game {
   constructor() {}
 
   start() {
-    
+    const mappedDataToCards = prototypeQuestions.map(data => {
+      return new Card(data.id, data.question, data.answers, data.correctAnswer);
+    });
   }
 
   printMessage(deck, round) {
