@@ -18,4 +18,4 @@ __Shout outs__
 Thank you to Bob, Leta and Travis for teaching us during Module 2! Thank you to all of the members of my cohort that helped guide me when things were looking confusing to me along the way.
 
 __Links__  
-[Original Assignment Repository] (https://github.com/turingschool-examples/flashcards-starter)
+[Original Assignment Repository](https://github.com/turingschool-examples/flashcards-starter)
