@@ -1,14 +1,12 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const Turn = require('../src/Turn');
 const Card = require('../src/Card');
-const Deck = require('..src/Deck');
+const Deck = require('../src/Deck');
 const Round = require('../src/Round.js');
 
 describe('Round', () => {
   it('should be a function', () => {
-    const round = new Round();
     expect(Round).to.be.a('function');
   });
 
@@ -23,7 +21,7 @@ describe('Round', () => {
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    expect(round.deck.cardSet).to.deep.equal(deck);
+    expect(round.deck).to.deep.equal(deck);
   });
 
   it('should track the number of turns taken', () => {
@@ -66,9 +64,11 @@ describe('Round', () => {
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    const playRound = round.takeTurn('pug');
-    expect(playRound).to.be.an.instanceof(Turn);
-    expect(round.currentCard).to.equal(card1);
+    let currentCard = round.returnCurrentCard();
+    expect(currentCard).to.equal(card1);
+    round.takeTurn('pug');
+    currentCard = round.returnCurrentCard();
+    expect(currentCard).to.equal(card2);
   });
 
   it('should update the round each time a turn is played regardless of correct or incorrect answer', () => {
@@ -88,20 +88,8 @@ describe('Round', () => {
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
     round.takeTurn('sea otter');
-    const currentCard = round.currentCard();
+    const currentCard = round.returnCurrentCard();
     expect(currentCard).to.equal(card2);
-  });
-
-  it('should evaluate the guess when a turn is played', () => {
-    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
-    const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
-    const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
-    const deck = new Deck([card1, card2, card3]);
-    const round = new Round(deck);
-    let evaluateGuess = round.takeTurn('sea otter');
-    expect(evaluateGuess).to.equal('correct!');
-    evaluateGuess = round.takeTurn('appendix');
-    expect(evaluateGuess).to.equal('incorrect!');
   });
 
   it('should store the id of the cards on incorrect guesses', () => {
@@ -110,11 +98,9 @@ describe('Round', () => {
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    let evaluateGuess = round.takeTurn('sea otter');
-    expect(evaluateGuess).to.equal('correct!');
+    round.takeTurn('sea otter');
     expect(round.incorrectGuesses).to.deep.equal([]);
-    evaluateGuess = round.takeTurn('appendix');
-    expect(evaluateGuess).to.equal('incorrect!');
+    round.takeTurn('appendix');
     expect(round.incorrectGuesses).to.deep.equal([2]);
   });
 
@@ -131,12 +117,15 @@ describe('Round', () => {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
-    const deck = new Deck([card1, card2, card3]);
+    const card4 = new Card(4, 'What is the captial of Colorado?', ['Grand Junction', 'Colorado Springs', 'Denver'], 'Denver');
+    const deck = new Deck([card1, card2, card3, card4]);
     const round = new Round(deck);
-    let returnPercent = round.takeTurn('pug');
+    round.takeTurn('pug');
     expect(round.incorrectGuesses).to.deep.equal([1]);
-    returnPercent = round.takeTurn('gallbladder');
-    expect(returnPercent).to.equal(50);
+    round.takeTurn('gallbladder');
+    round.takeTurn('gotham');
+    round.takeTurn('Denver');
+    expect(round.calculatePercentCorrect()).to.equal(50);
   });
 
   it('should have a function that returns a correct or incorrect message', () => {
@@ -145,10 +134,25 @@ describe('Round', () => {
     const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    expect(round.giveFeedback).to.be.a('function');
     let returnMessage = round.takeTurn('pug');
     expect(returnMessage).to.equal('incorrect!');
     returnMessage = round.takeTurn('gallbladder');
     expect(returnMessage).to.equal('correct!');
+  });
+
+  it('should return the percentage correct when round end', () => {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(2, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(3, 'What is Travis\'s middle name?', ['Lex', 'William', 'Fitzgerald'], 'Fitzgerald');
+    const card4 = new Card(4, 'What is the captial of Colorado?', ['Grand Junction', 'Colorado Springs', 'Denver'], 'Denver');
+    const deck = new Deck([card1, card2, card3, card4]);
+    const round = new Round(deck);
+    round.takeTurn('pug');
+    expect(round.incorrectGuesses).to.deep.equal([1]);
+    round.takeTurn('gallbladder');
+    round.takeTurn('gotham');
+    round.takeTurn('Denver');
+    expect(round.calculatePercentCorrect()).to.equal(50);
+    expect(round.endRound()).to.equal(`** Round over!** You answered 50% of the questions correctly!`);
   });
 });
