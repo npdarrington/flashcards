@@ -17,6 +17,7 @@ class Game {
     });
     const deck = new Deck(mappedDataToCards);
     const round = new Round(deck);
+    this.currentRound = round;
     this.printQuestion(round);
     this.printMessage(deck, round);
   }
