@@ -59,10 +59,6 @@ describe('Round', () => {
     expect(round.incorrectGuesses).to.deep.equal([2]);
   });
 
-  it('should return the percentage of correct guesses', () => {
-    expect(round.calculatePercentCorrect).to.be.a('function');
-  });
-
   it('should return incorrect if the guess in wrong', () => {
     expect(round.takeTurn('pug')).to.equal('incorrect!');
   });
@@ -71,12 +67,11 @@ describe('Round', () => {
     expect(round.takeTurn('sea otter')).to.equal('correct!');
   });
 
-  it('should return the percentage correct when round end', () => {
+  it('should return the percentage correct when user has finished game', () => {
     round.takeTurn('pug');
     round.takeTurn('gallbladder');
     round.takeTurn('gotham');
     round.takeTurn('Denver');
     expect(round.calculatePercentCorrect()).to.equal(50);
-    expect(round.endRound()).to.equal(`** Round over!** You answered 50% of the questions correctly!`);
   });
 });
